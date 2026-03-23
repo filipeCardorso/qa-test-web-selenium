@@ -1,0 +1,8 @@
+web:
+  base-url: https://blogdoagi.com.br/
+  browser: chrome
+  headless: false
+  timeout:
+    implicit: 10
+    explicit: 15
+    page-load: 30
