@@ -1,5 +1,5 @@
 web:
-  base-url: https://blogdoagi.com.br/
+  base-url: https://blog.agibank.com.br/
   browser: chrome
   headless: false
   timeout:

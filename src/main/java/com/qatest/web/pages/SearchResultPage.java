@@ -2,8 +2,10 @@ package com.qatest.web.pages;
 
 import com.qatest.web.config.ConfigManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -17,6 +19,13 @@ public class SearchResultPage extends BasePage {
 
     public SearchResultPage(WebDriver driver) {
         super(driver);
+        waitForSearchNavigation();
+    }
+
+    private void waitForSearchNavigation() {
+        int timeout = ConfigManager.getInstance().getExplicitTimeout();
+        new WebDriverWait(driver, Duration.ofSeconds(timeout))
+                .until(ExpectedConditions.urlContains("?s="));
     }
 
     public int getResultCount() {
@@ -44,7 +53,13 @@ public class SearchResultPage extends BasePage {
         if (titles.isEmpty()) {
             return "";
         }
-        return titles.get(0).getText();
+        // Use textContent via JS for reliability (some themes lazy-render text)
+        String text = titles.get(0).getText();
+        if (text.isEmpty()) {
+            text = (String) ((JavascriptExecutor) driver)
+                    .executeScript("return arguments[0].textContent;", titles.get(0));
+        }
+        return text != null ? text.trim() : "";
     }
 
     public String getFirstResultLink() {
@@ -63,6 +78,7 @@ public class SearchResultPage extends BasePage {
 
     public boolean isPageLoaded() {
         try {
+            waitForSearchNavigation();
             waitForPageToLoad();
             return true;
         } catch (Exception e) {
