@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.11.2'
+}
+
+group = 'com.qatest.web'
+version = '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Selenium
+    implementation 'org.seleniumhq.selenium:selenium-java:4.27.0'
+
+    // WebDriverManager
+    implementation 'io.github.bonigarcia:webdrivermanager:5.9.2'
+
+    // Config
+    implementation 'org.yaml:snakeyaml:2.3'
+
+    // Test
+    testImplementation platform('org.junit:junit-bom:5.11.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.assertj:assertj-core:3.27.3'
+
+    // Allure
+    testImplementation 'io.qameta.allure:allure-junit5:2.29.1'
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty 'CI', System.getenv('CI') ?: 'false'
+
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+        showStandardStreams = true
+    }
+}
