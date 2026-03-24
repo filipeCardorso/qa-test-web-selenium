@@ -230,7 +230,7 @@ O projeto possui pipeline **GitHub Actions** que executa automaticamente a cada 
 1. **Setup:** Configura JDK 17, Chrome stable e Gradle
 2. **Testes:** Executa todos os cenários em modo headless
 3. **Relatório de Resultados:** Publica gráficos com contagem de testes (passed/failed/skipped) diretamente no Summary da pipeline
-4. **Allure Report:** Gera e publica o relatório em GitHub Pages
+4. **Allure Report:** Gera relatório e salva como artifact
 5. **Artifacts:** Salva o relatório Allure para download (retenção de 30 dias)
 
 ## Relatórios
@@ -239,7 +239,7 @@ O projeto possui pipeline **GitHub Actions** que executa automaticamente a cada 
 |------|---------------|-------------|
 | **JUnit (terminal)** | Output do `./gradlew test` | Resultado de cada teste (PASSED/FAILED) |
 | **Pipeline Summary** | GitHub Actions > run > Summary | Gráficos com total de testes, taxa de sucesso |
-| **Allure Report** | GitHub Pages ou `./gradlew allureServe` | Cenários detalhados, severidade, duração, steps, histórico |
+| **Allure Report** | Artifact no GitHub Actions ou `./gradlew allureServe` | Cenários detalhados, severidade, duração, steps, histórico |
 
 ## Decisões Técnicas
 
