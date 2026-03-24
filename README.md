@@ -233,11 +233,6 @@ O projeto possui pipeline **GitHub Actions** que executa automaticamente a cada 
 4. **Allure Report:** Gera e publica o relatório em GitHub Pages
 5. **Artifacts:** Salva o relatório Allure para download (retenção de 30 dias)
 
-### Relatório Online
-
-Após cada execução, o Allure Report fica disponível em:
-**https://filipecardorso.github.io/qa-test-web-selenium/allure-report**
-
 ## Relatórios
 
 | Tipo | Onde Encontrar | O Que Mostra |
